@@ -30,6 +30,7 @@ deletelogo=true
 deletetxt=true
 lockfile=""
 workdir=""
+split=false
 
 while [[ $# -gt 1 ]]
 do
@@ -61,6 +62,10 @@ case $key in
     ;;
     --work-dir=*)
     workdir="${key#*=}"
+    shift
+    ;;
+    --split)
+    split=true
     shift
     ;;
     *)
@@ -201,13 +206,17 @@ if $hascommercials ; then
     $ffmpegPath -hide_banner -loglevel error -nostdin -i "$infile" -ss "$start" -t "$duration" -c copy -y "$chapterfile"
   fi
 
-  $ffmpegPath -hide_banner -loglevel error -nostdin -i "$metafile" -i "concat:${concat:1}" -c copy -map_metadata 0 -y "$outfile"
+  if ! $split : then
+    $ffmpegPath -hide_banner -loglevel error -nostdin -i "$metafile" -i "concat:${concat:1}" -c copy -map_metadata 0 -y "$outfile"
+  fi
 fi
 
-for i in "${tempfiles[@]}"
-do
-  rm "$i"
-done
+if $split : then
+    for i in "${tempfiles[@]}"
+    do
+      rm "$i"
+    done
+fi
 
 if $deleteedl ; then
   if [ -f "$edlfile" ] ; then
