@@ -206,12 +206,12 @@ if $hascommercials ; then
     $ffmpegPath -hide_banner -loglevel error -nostdin -i "$infile" -ss "$start" -t "$duration" -c copy -y "$chapterfile"
   fi
 
-  if ! $split : then
+  if ! $split ; then
     $ffmpegPath -hide_banner -loglevel error -nostdin -i "$metafile" -i "concat:${concat:1}" -c copy -map_metadata 0 -y "$outfile"
   fi
 fi
 
-if $split : then
+if $split ; then
     for i in "${tempfiles[@]}"
     do
       rm "$i"
