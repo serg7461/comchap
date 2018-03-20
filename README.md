@@ -37,6 +37,7 @@ Comcut is very similar to Comchap, however the detected commercials are removed 
 ### Command Line Arguments
 -  `--keep-edl`           Keep the generated EDL file (do not delete when done)
 -  `--keep-meta`          Keep the generated ffmeta file used to tell ffmpeg where the chapters are located
+-  `--split`              Keep splitted files, do not concatenate
 -  `--ffmpeg=PATH`        Use PATH as the path to ffmpeg binary
 -  `--comskip=PATH`       Use PATH as the path to comskip binary
 -  `--comskip-ini=PATH`   Use PATH as the path to the comskip.ini file used by Comskip
