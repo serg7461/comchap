@@ -211,7 +211,7 @@ if $hascommercials ; then
   fi
 fi
 
-if $split ; then
+if ! $split ; then
     for i in "${tempfiles[@]}"
     do
       rm "$i"
